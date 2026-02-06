@@ -161,16 +161,14 @@ rec-lostlink/
 ## API Details
 | Method | Endpoint          | Description               |
 | :---   | :---              | :---                      |
-| POST   | `/api/auth/login` | User/Admin Login          |
+| POST   | `/api/auth/login` | User Login                |
 | POST   | `/api/items/report`| Report Lost/Found Item   |
 | GET    | `/api/items/found`| Get all found items       |
 | GET    | `/api/items/my-requests` | Get user's history |
 
-## Roadmap / Future Improvements
-- [ ] Push Notifications for item matches.
-- [ ] Chat functionality between finder and loser (anonymized).
+## Future Improvements
 - [ ] AI-based image matching for lost vs found items.
-- [ ] QR Code generation for item claiming.
+- [ ] Design - need to remove or add
 
 ## Contributing
 1. Fork the Project
