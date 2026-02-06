@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
+import { COLORS } from '../../constants/theme';
 // import { Picker } from '@react-native-picker/picker'; // Unused and causing errors
 
 // Assuming simple text input for Role or a toggle for now to avoid extra dependencies if possible
@@ -73,14 +74,14 @@ const RegisterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 20,
         justifyContent: 'center',
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
         marginBottom: 30,
         textAlign: 'center',
     },
@@ -88,22 +89,22 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     input: {
-        backgroundColor: '#f5f5f5',
+        backgroundColor: COLORS.background,
         padding: 15,
         borderRadius: 10,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
     },
     button: {
-        backgroundColor: '#800000', // Maroon accent
+        backgroundColor: COLORS.accent, // Purple Accent instead of Maroon
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
         marginTop: 10,
     },
     buttonText: {
-        color: '#fff',
+        color: COLORS.white,
         fontSize: 18,
         fontWeight: 'bold',
     },
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     linkText: {
-        color: '#003366',
+        color: COLORS.primary,
     },
 });
 

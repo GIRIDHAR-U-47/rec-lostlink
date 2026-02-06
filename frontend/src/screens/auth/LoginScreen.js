@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
+import { COLORS } from '../../constants/theme';
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -18,8 +19,11 @@ const LoginScreen = ({ navigation }) => {
     return (
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
             <View style={styles.logoContainer}>
-                {/* Placeholder for Logo */}
-                <View style={styles.logoPlaceholder}><Text style={styles.logoText}>REC</Text></View>
+                <Image
+                    source={require('../../../assets/rec_logo.png')}
+                    style={styles.logoImage}
+                    resizeMode="contain"
+                />
                 <Text style={styles.title}>REC LostLink</Text>
                 <Text style={styles.subtitle}>Lost & Found Management System</Text>
             </View>
@@ -56,7 +60,7 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 20,
         justifyContent: 'center',
     },
@@ -64,50 +68,41 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 40,
     },
-    logoPlaceholder: {
-        width: 80,
-        height: 80,
-        backgroundColor: '#003366',
-        borderRadius: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
-    logoText: {
-        color: '#fff',
-        fontSize: 24,
-        fontWeight: 'bold',
+    logoImage: {
+        width: 120,
+        height: 120,
+        marginBottom: 20,
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
     },
     subtitle: {
         fontSize: 16,
-        color: '#666',
+        color: COLORS.textLight,
         marginTop: 5,
     },
     formContainer: {
         width: '100%',
     },
     input: {
-        backgroundColor: '#f5f5f5',
+        backgroundColor: COLORS.background,
         padding: 15,
         borderRadius: 10,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
     },
     button: {
-        backgroundColor: '#003366',
+        backgroundColor: COLORS.primary,
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
         marginTop: 10,
     },
     buttonText: {
-        color: '#fff',
+        color: COLORS.white,
         fontSize: 18,
         fontWeight: 'bold',
     },
@@ -116,7 +111,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     linkText: {
-        color: '#003366',
+        color: COLORS.primary,
     },
 });
 

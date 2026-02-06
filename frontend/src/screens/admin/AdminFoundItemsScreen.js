@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
 import api from '../../services/api';
+import { COLORS } from '../../constants/theme';
 
 const AdminFoundItemsScreen = ({ navigation }) => {
     const [items, setItems] = useState([]);
@@ -59,7 +60,7 @@ const AdminFoundItemsScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {loading ? (
-                <ActivityIndicator size="large" color="#003366" />
+                <ActivityIndicator size="large" color={COLORS.primary} />
             ) : (
                 <FlatList
                     data={items}
@@ -76,19 +77,19 @@ const AdminFoundItemsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 10,
     },
     list: {
         paddingBottom: 20,
     },
     card: {
-        backgroundColor: '#f9f9f9',
+        backgroundColor: COLORS.background,
         padding: 15,
         borderRadius: 10,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
     },
     cardHeader: {
         flexDirection: 'row',
@@ -98,23 +99,23 @@ const styles = StyleSheet.create({
     category: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
     },
     date: {
-        color: '#666',
+        color: COLORS.textLight,
         fontSize: 12,
     },
     location: {
-        color: '#444',
+        color: COLORS.text,
         marginBottom: 5,
     },
     description: {
-        color: '#555',
+        color: COLORS.textLight,
         marginBottom: 10,
     },
     reporter: {
         fontStyle: 'italic',
-        color: '#666',
+        color: COLORS.secondary || '#666',
         marginBottom: 10,
         fontSize: 12,
     },
@@ -128,17 +129,17 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     verifyButton: {
-        backgroundColor: '#28a745',
+        backgroundColor: COLORS.success,
     },
     buttonText: {
-        color: '#fff',
+        color: COLORS.white,
         fontWeight: 'bold',
         fontSize: 14,
     },
     emptyText: {
         textAlign: 'center',
         marginTop: 50,
-        color: '#666',
+        color: COLORS.textLight,
     },
 });
 

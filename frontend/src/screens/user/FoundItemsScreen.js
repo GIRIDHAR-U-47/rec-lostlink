@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Image } from 'react-native';
 import api from '../../services/api';
+import { COLORS } from '../../constants/theme';
 
 const FoundItemsScreen = ({ navigation }) => {
     const [items, setItems] = useState([]);
@@ -43,7 +44,7 @@ const FoundItemsScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {loading ? (
-                <ActivityIndicator size="large" color="#003366" />
+                <ActivityIndicator size="large" color={COLORS.primary} />
             ) : (
                 <FlatList
                     data={items}
@@ -60,19 +61,19 @@ const FoundItemsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 10,
     },
     list: {
         paddingBottom: 20,
     },
     card: {
-        backgroundColor: '#f9f9f9',
+        backgroundColor: COLORS.background,
         padding: 15,
         borderRadius: 10,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
     },
     cardHeader: {
         flexDirection: 'row',
@@ -82,35 +83,35 @@ const styles = StyleSheet.create({
     category: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
     },
     date: {
-        color: '#666',
+        color: COLORS.textLight,
         fontSize: 12,
     },
     location: {
-        color: '#444',
+        color: COLORS.text,
         marginBottom: 5,
         fontWeight: '500',
     },
     description: {
-        color: '#555',
+        color: COLORS.textLight,
         marginBottom: 10,
     },
     claimButton: {
-        backgroundColor: '#003366',
+        backgroundColor: COLORS.primary,
         padding: 10,
         borderRadius: 8,
         alignItems: 'center',
     },
     claimButtonText: {
-        color: '#fff',
+        color: COLORS.white,
         fontWeight: 'bold',
     },
     emptyText: {
         textAlign: 'center',
         marginTop: 50,
-        color: '#666',
+        color: COLORS.textLight,
     },
 });
 

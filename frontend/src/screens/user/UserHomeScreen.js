@@ -1,108 +1,294 @@
 import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image, SafeAreaView, Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
+import { COLORS } from '../../constants/theme';
+
+const { width } = Dimensions.get('window');
 
 const UserHomeScreen = ({ navigation }) => {
     const { logout, userInfo } = useContext(AuthContext);
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <SafeAreaView style={styles.safeArea}>
             <View style={styles.header}>
-                <Text style={styles.welcomeText}>Welcome, {userInfo?.name}</Text>
-                <Text style={styles.subText}>Student / Faculty</Text>
-            </View>
-
-            <View style={styles.actionContainer}>
-                <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#e3f2fd' }]}
-                    onPress={() => navigation.navigate('ReportLost')} // To be implemented
-                >
-                    <Text style={styles.cardTitle}>Report Lost Item</Text>
-                    <Text style={styles.cardDesc}>Did you lose something? Report it here.</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#e8f5e9' }]}
-                    onPress={() => navigation.navigate('ReportFound')} // To be implemented
-                >
-                    <Text style={styles.cardTitle}>Report Found Item</Text>
-                    <Text style={styles.cardDesc}>Found something? Help return it.</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#fff3e0' }]}
-                    onPress={() => navigation.navigate('FoundItems')} // To be implemented
-                >
-                    <Text style={styles.cardTitle}>View Found Items</Text>
-                    <Text style={styles.cardDesc}>Browse items currently in Lost & Found.</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#f3e5f5' }]}
-                    onPress={() => navigation.navigate('MyRequests')} // To be implemented
-                >
-                    <Text style={styles.cardTitle}>My Requests</Text>
-                    <Text style={styles.cardDesc}>Track your lost reports and claims.</Text>
+                <View style={styles.logoRow}>
+                    <View>
+                        <Text style={styles.headerTitle}>REC LostLink</Text>
+                        <Text style={styles.headerSubtitle}>Rajalakshmi Engineering College</Text>
+                    </View>
+                </View>
+                <TouchableOpacity onPress={logout} style={styles.logoutBtn}>
+                    <Text style={styles.logoutIcon}>➜</Text>
+                    {/* Using simple text arrow for now, can replace with Icon later */}
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity onPress={logout} style={styles.logoutButton}>
-                <Text style={styles.logoutText}>Logout</Text>
-            </TouchableOpacity>
-        </ScrollView>
+            <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+
+                {/* Welcome Card */}
+                <View style={styles.welcomeCard}>
+                    <Text style={styles.welcomeLabel}>Welcome back,</Text>
+                    <Text style={styles.userName}>{userInfo?.name || 'User'}</Text>
+                    <View style={styles.roleBadge}>
+                        <Text style={styles.roleText}>Student</Text>
+                    </View>
+                </View>
+
+                <Text style={styles.sectionTitle}>Quick Actions</Text>
+
+                {/* Primary Actions Grid */}
+                <View style={styles.gridContainer}>
+                    <TouchableOpacity
+                        style={[styles.actionCard, { backgroundColor: COLORS.primary }]}
+                        onPress={() => navigation.navigate('ReportLost')}
+                    >
+                        <View style={styles.actionIconCircle}>
+                            <Text style={styles.actionIconText}>🔍</Text>
+                        </View>
+                        <Text style={styles.actionTitle}>Report Lost Item</Text>
+                        <Text style={styles.actionDesc}>Lost something on campus?</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[styles.actionCard, { backgroundColor: COLORS.primary }]} // Updated to Primary to match login button
+                        onPress={() => navigation.navigate('ReportFound')}
+                    >
+                        <View style={[styles.actionIconCircle, { backgroundColor: 'rgba(255,255,255,0.2)' }]}>
+                            <Text style={styles.actionIconText}>✓</Text>
+                        </View>
+                        <Text style={styles.actionTitle}>Report Found Item</Text>
+                        <Text style={styles.actionDesc}>Found something?</Text>
+                    </TouchableOpacity>
+                </View>
+
+                {/* Secondary Actions Row */}
+                <View style={styles.secondaryRow}>
+                    <TouchableOpacity
+                        style={styles.secondaryBtn}
+                        onPress={() => navigation.navigate('FoundItems')}
+                    >
+                        <Text style={styles.secondaryBtnIcon}>👁</Text>
+                        <Text style={styles.secondaryBtnText}>Browse Items</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.secondaryBtn}
+                        onPress={() => navigation.navigate('MyRequests')}
+                    >
+                        <Text style={styles.secondaryBtnIcon}>📋</Text>
+                        <Text style={styles.secondaryBtnText}>My Requests</Text>
+                    </TouchableOpacity>
+                </View>
+
+                {/* Dashboard Stats */}
+                <View style={styles.statsRow}>
+                    <View style={styles.statCard}>
+                        <Text style={styles.statNumber}>0</Text>
+                        <Text style={styles.statLabel}>My Lost Items</Text>
+                    </View>
+                    <View style={styles.statCard}>
+                        <Text style={styles.statNumber}>0</Text>
+                        <Text style={styles.statLabel}>My Claims</Text>
+                    </View>
+                    <View style={styles.statCard}>
+                        <Text style={styles.statNumber}>0</Text>
+                        <Text style={styles.statLabel}>Available Items</Text>
+                    </View>
+                </View>
+
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-        backgroundColor: '#fff',
-        flexGrow: 1,
+    safeArea: {
+        flex: 1,
+        backgroundColor: COLORS.primary, // Header background matches theme
     },
     header: {
-        marginBottom: 30,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        backgroundColor: COLORS.primary,
     },
-    welcomeText: {
+    logoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    iconCircle: {
+        width: 40,
+        height: 40,
+        backgroundColor: COLORS.accent,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10,
+    },
+    headerLogo: {
+        width: 24,
+        height: 24,
+        tintColor: COLORS.white,
+    },
+    headerTitle: {
+        color: COLORS.white,
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    headerSubtitle: {
+        color: 'rgba(255,255,255,0.7)',
+        fontSize: 12,
+    },
+    logoutBtn: {
+        width: 40,
+        height: 40,
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logoutIcon: {
+        color: COLORS.white,
+        fontSize: 20,
+    },
+
+    container: {
+        backgroundColor: COLORS.white,
+        flexGrow: 1,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        paddingHorizontal: 20,
+        paddingTop: 30,
+        marginTop: 10,
+        paddingBottom: 40,
+    },
+    welcomeCard: {
+        backgroundColor: COLORS.primary, // Using primary color for welcome card similar to reference blue
+        borderRadius: 20,
+        padding: 20,
+        marginBottom: 25,
+        // Adding a gradient-like feel or solid color
+    },
+    welcomeLabel: {
+        color: 'rgba(255,255,255,0.8)',
+        fontSize: 14,
+        marginBottom: 5,
+    },
+    userName: {
+        color: COLORS.white,
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#003366',
+        marginBottom: 10,
     },
-    subText: {
-        fontSize: 16,
-        color: '#666',
-    },
-    actionContainer: {
-        marginBottom: 30,
-    },
-    card: {
-        padding: 20,
+    roleBadge: {
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        alignSelf: 'flex-start',
+        paddingHorizontal: 12,
+        paddingVertical: 5,
         borderRadius: 15,
-        marginBottom: 15,
-        elevation: 3, // Shadow for Android
-        shadowColor: '#000', // Shadow for iOS
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
     },
-    cardTitle: {
+    roleText: {
+        color: COLORS.white,
+        fontSize: 12,
+        fontWeight: '600',
+    },
+
+    sectionTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#000',
+        marginBottom: 15,
+    },
+
+    gridContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+    },
+    actionCard: {
+        width: (width - 55) / 2, // responsive half width
+        height: 180,
+        borderRadius: 20,
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+    },
+    actionIconCircle: {
+        width: 50,
+        height: 50,
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 15,
+    },
+    actionIconText: {
+        fontSize: 24,
+        color: COLORS.white,
+    },
+    actionTitle: {
+        color: COLORS.white,
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#333',
     },
-    cardDesc: {
-        fontSize: 14,
-        color: '#666',
+    actionDesc: {
+        color: 'rgba(255,255,255,0.8)',
+        fontSize: 13,
     },
-    logoutButton: {
-        padding: 15,
-        backgroundColor: '#eee',
-        borderRadius: 10,
+
+    secondaryRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 25,
+    },
+    secondaryBtn: {
+        width: (width - 55) / 2,
+        flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: COLORS.white,
+        borderWidth: 1,
+        borderColor: COLORS.border,
+        paddingVertical: 15,
+        borderRadius: 15,
+        elevation: 1, // light shadow
     },
-    logoutText: {
-        color: '#333',
+    secondaryBtnIcon: {
+        fontSize: 18,
+        color: COLORS.primary,
+        marginRight: 8,
+    },
+    secondaryBtnText: {
+        fontSize: 14,
         fontWeight: 'bold',
+        color: '#333',
+    },
+
+    statsRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    statCard: {
+        width: (width - 60) / 3,
+        backgroundColor: COLORS.background, // Light gray/blue tint
+        paddingVertical: 20,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    statNumber: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: COLORS.primary,
+        marginBottom: 5,
+    },
+    statLabel: {
+        fontSize: 12,
+        color: COLORS.textLight,
+        textAlign: 'center',
     },
 });
 

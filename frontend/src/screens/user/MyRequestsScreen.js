@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import api from '../../services/api';
+import { COLORS } from '../../constants/theme';
 
 const MyRequestsScreen = ({ navigation }) => {
     const [items, setItems] = useState([]);
@@ -23,18 +24,18 @@ const MyRequestsScreen = ({ navigation }) => {
 
     const getStatusColor = (status) => {
         switch (status) {
-            case 'PENDING': return '#ffc107';
-            case 'APPROVED': return '#28a745';
-            case 'RETURNED': return '#007bff';
-            case 'RESOLVED': return '#17a2b8';
-            default: return '#6c757d';
+            case 'PENDING': return '#ffc107'; // Keep status colors standard or map to theme if desired
+            case 'APPROVED': return COLORS.success;
+            case 'RETURNED': return COLORS.primary; // Or a specific blue if needed
+            case 'RESOLVED': return COLORS.info || '#17a2b8';
+            default: return COLORS.textLight;
         }
     };
 
     const renderItem = ({ item }) => (
         <View style={styles.card}>
             <View style={styles.cardHeader}>
-                <Text style={[styles.type, { color: item.type === 'LOST' ? '#dc3545' : '#28a745' }]}>
+                <Text style={[styles.type, { color: item.type === 'LOST' ? COLORS.error : COLORS.success }]}>
                     {item.type}
                 </Text>
                 <View style={[styles.badge, { backgroundColor: getStatusColor(item.status) }]}>
@@ -52,7 +53,7 @@ const MyRequestsScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {loading ? (
-                <ActivityIndicator size="large" color="#003366" />
+                <ActivityIndicator size="large" color={COLORS.primary} />
             ) : (
                 <FlatList
                     data={items}
@@ -69,19 +70,19 @@ const MyRequestsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 10,
     },
     list: {
         paddingBottom: 20,
     },
     card: {
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 15,
         borderRadius: 10,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
         elevation: 2,
     },
     cardHeader: {
@@ -101,33 +102,33 @@ const styles = StyleSheet.create({
         borderRadius: 12,
     },
     badgeText: {
-        color: '#fff',
+        color: COLORS.white,
         fontSize: 10,
         fontWeight: 'bold',
     },
     category: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#333',
+        color: COLORS.text,
         marginTop: 5,
     },
     date: {
-        color: '#888',
+        color: COLORS.textLight,
         fontSize: 12,
         marginBottom: 5,
     },
     description: {
-        color: '#555',
+        color: COLORS.textLight, // Assuming 555 is textLight/medium gray
         marginBottom: 5,
     },
     location: {
-        color: '#444',
+        color: COLORS.text, // Assuming 444 is close to main text
         fontSize: 12,
     },
     emptyText: {
         textAlign: 'center',
         marginTop: 50,
-        color: '#666',
+        color: COLORS.textLight,
     },
 });
 

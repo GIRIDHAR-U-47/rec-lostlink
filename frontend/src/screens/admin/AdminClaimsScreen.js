@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TouchableOpacity, Alert, Image } from 'react-native';
 import api from '../../services/api';
+import { COLORS } from '../../constants/theme';
 
 const AdminClaimsScreen = ({ navigation }) => {
     const [claims, setClaims] = useState([]);
@@ -61,7 +62,7 @@ const AdminClaimsScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {loading ? (
-                <ActivityIndicator size="large" color="#003366" />
+                <ActivityIndicator size="large" color={COLORS.primary} />
             ) : (
                 <FlatList
                     data={claims}
@@ -78,19 +79,19 @@ const AdminClaimsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 10,
     },
     list: {
         paddingBottom: 20,
     },
     card: {
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         padding: 15,
         borderRadius: 10,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
         elevation: 2,
     },
     cardHeader: {
@@ -101,24 +102,25 @@ const styles = StyleSheet.create({
     itemTitle: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
     },
     date: {
-        color: '#666',
+        color: COLORS.textLight,
         fontSize: 12,
     },
     claimant: {
         fontWeight: 'bold',
         marginBottom: 10,
         fontSize: 14,
+        color: COLORS.text,
     },
     detailsHeader: {
         fontSize: 12,
-        color: '#666',
+        color: COLORS.textLight,
         marginBottom: 2,
     },
     details: {
-        color: '#444',
+        color: COLORS.text,
         marginBottom: 15,
         fontStyle: 'italic',
     },
@@ -133,20 +135,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     approveButton: {
-        backgroundColor: '#28a745',
+        backgroundColor: COLORS.success,
     },
     rejectButton: {
-        backgroundColor: '#dc3545',
+        backgroundColor: COLORS.error,
     },
     buttonText: {
-        color: '#fff',
+        color: COLORS.white,
         fontWeight: 'bold',
         fontSize: 14,
     },
     emptyText: {
         textAlign: 'center',
         marginTop: 50,
-        color: '#666',
+        color: COLORS.textLight,
     },
 });
 

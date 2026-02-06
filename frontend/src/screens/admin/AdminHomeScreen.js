@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
+import { COLORS } from '../../constants/theme';
 
 const AdminHomeScreen = ({ navigation }) => {
     const { logout, userInfo } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const AdminHomeScreen = ({ navigation }) => {
 
             <View style={styles.actionContainer}>
                 <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#e3f2fd' }]}
+                    style={[styles.card, { backgroundColor: COLORS.lavender }]}
                     onPress={() => navigation.navigate('AdminFoundItems')} // To be implemented
                 >
                     <Text style={styles.cardTitle}>Manage Found Items</Text>
@@ -34,14 +35,14 @@ const AdminHomeScreen = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#fff3e0' }]}
+                    style={[styles.card, { backgroundColor: COLORS.pastel }]}
                 >
                     <Text style={styles.cardTitle}>View Lost Reports</Text>
                     <Text style={styles.cardDesc}>See what students have reported lost.</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={[styles.card, { backgroundColor: '#e8f5e9' }]}
+                    style={[styles.card, { backgroundColor: COLORS.background, borderColor: COLORS.success, borderWidth: 1 }]}
                     onPress={() => navigation.navigate('AdminClaims')}
                 >
                     <Text style={styles.cardTitle}>Manage Claims</Text>
@@ -59,7 +60,7 @@ const AdminHomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: COLORS.white,
         flexGrow: 1,
     },
     header: {
@@ -68,11 +69,11 @@ const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
     },
     subText: {
         fontSize: 16,
-        color: '#666',
+        color: COLORS.textLight,
     },
     statsContainer: {
         flexDirection: 'row',
@@ -81,20 +82,20 @@ const styles = StyleSheet.create({
     },
     statBox: {
         width: '48%',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: COLORS.background,
         padding: 20,
         borderRadius: 10,
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#eee',
+        borderColor: COLORS.border,
     },
     statNumber: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#003366',
+        color: COLORS.primary,
     },
     statLabel: {
-        color: '#666',
+        color: COLORS.textLight,
     },
     actionContainer: {
         marginBottom: 30,
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginBottom: 15,
         elevation: 3,
-        shadowColor: '#000',
+        shadowColor: COLORS.shadow,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
@@ -113,20 +114,20 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#333',
+        color: COLORS.text,
     },
     cardDesc: {
         fontSize: 14,
-        color: '#666',
+        color: COLORS.textLight,
     },
     logoutButton: {
         padding: 15,
-        backgroundColor: '#eee',
+        backgroundColor: COLORS.border,
         borderRadius: 10,
         alignItems: 'center',
     },
     logoutText: {
-        color: '#333',
+        color: COLORS.text,
         fontWeight: 'bold',
     },
 });
