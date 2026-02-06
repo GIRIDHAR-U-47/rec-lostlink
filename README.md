@@ -27,7 +27,7 @@ Built with a focus on ease of use, security, and college branding, REC LostLink 
   <tr>
     <td align="center" valign="top" width="33.33%">
       <b>Home</b><br><sub>App overview</sub><br>
-      <img src="docs/assets/H1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/H2.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/H1.jpg" width="40%" align="middle" alt="Light" />
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>Report Item</b><br><sub>Lost & Found Forms</sub><br>
