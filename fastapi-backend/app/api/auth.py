@@ -47,7 +47,9 @@ async def login(
         "type": "Bearer",
         "id": str(user["_id"]),
         "email": user["email"],
-        "roles": roles
+        "roles": roles,
+        "name": user.get("name"),
+        "registerNumber": user.get("register_number") or user.get("registerNumber")
     }
     print("Returning response:", response_data) # DEBUG LOG
     return response_data

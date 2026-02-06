@@ -28,6 +28,13 @@ const FoundItemsScreen = ({ navigation }) => {
                 <Text style={styles.category}>{item.category}</Text>
                 <Text style={styles.date}>{new Date(item.dateTime).toLocaleDateString()}</Text>
             </View>
+            {item.imageUrl ? (
+                <Image
+                    source={{ uri: `http://10.113.185.182:8080/${item.imageUrl}` }}
+                    style={styles.itemImage}
+                    resizeMode="cover"
+                />
+            ) : null}
             <Text style={styles.location}>📍 {item.location}</Text>
             <Text style={styles.description}>{item.description}</Text>
 
@@ -43,6 +50,7 @@ const FoundItemsScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.header}>Lost & Found Feed</Text>
             {loading ? (
                 <ActivityIndicator size="large" color={COLORS.primary} />
             ) : (
@@ -64,7 +72,16 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         padding: 10,
     },
+    header: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: COLORS.primary,
+        paddingTop: 50,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+    },
     list: {
+        paddingTop: 10, // Added space above first card
         paddingBottom: 20,
     },
     card: {
@@ -107,6 +124,12 @@ const styles = StyleSheet.create({
     claimButtonText: {
         color: COLORS.white,
         fontWeight: 'bold',
+    },
+    itemImage: {
+        width: '100%',
+        height: 200,
+        borderRadius: 10,
+        marginBottom: 10,
     },
     emptyText: {
         textAlign: 'center',

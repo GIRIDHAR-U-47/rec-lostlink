@@ -6,6 +6,7 @@ import { ActivityIndicator, View } from 'react-native';
 
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
+import SplashScreen from '../screens/SplashScreen'; // Import custom splash
 
 // Placeholder screens for stacks (will implement next)
 import UserHomeScreen from '../screens/user/UserHomeScreen';
@@ -30,12 +31,12 @@ const AuthNavigator = () => (
 );
 
 const UserNavigator = () => (
-    <UserStack.Navigator>
-        <UserStack.Screen name="UserHome" component={UserHomeScreen} options={{ title: 'REC LostLink' }} />
-        <UserStack.Screen name="ReportLost" component={ReportLostScreen} options={{ title: 'Report Lost Item' }} />
-        <UserStack.Screen name="ReportFound" component={ReportFoundScreen} options={{ title: 'Report Found Item' }} />
-        <UserStack.Screen name="FoundItems" component={FoundItemsScreen} options={{ title: 'Lost & Found Feed' }} />
-        <UserStack.Screen name="MyRequests" component={MyRequestsScreen} options={{ title: 'My Activity' }} />
+    <UserStack.Navigator screenOptions={{ headerShown: false }}>
+        <UserStack.Screen name="UserHome" component={UserHomeScreen} />
+        <UserStack.Screen name="ReportLost" component={ReportLostScreen} />
+        <UserStack.Screen name="ReportFound" component={ReportFoundScreen} />
+        <UserStack.Screen name="FoundItems" component={FoundItemsScreen} />
+        <UserStack.Screen name="MyRequests" component={MyRequestsScreen} />
         {/* Add more user screens */}
     </UserStack.Navigator>
 );
@@ -50,7 +51,11 @@ const AdminNavigator = () => (
 );
 
 const AppNavigator = () => {
-    const { isLoading, userToken, userInfo } = useContext(AuthContext);
+    const { isLoading, splashLoading, userToken, userInfo } = useContext(AuthContext);
+
+    if (splashLoading) {
+        return <SplashScreen />;
+    }
 
     if (isLoading) {
         return (

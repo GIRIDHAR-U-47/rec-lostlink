@@ -19,7 +19,6 @@ const UserHomeScreen = ({ navigation }) => {
                 </View>
                 <TouchableOpacity onPress={logout} style={styles.logoutBtn}>
                     <Text style={styles.logoutIcon}>➜</Text>
-                    {/* Using simple text arrow for now, can replace with Icon later */}
                 </TouchableOpacity>
             </View>
 
@@ -29,9 +28,9 @@ const UserHomeScreen = ({ navigation }) => {
                 <View style={styles.welcomeCard}>
                     <Text style={styles.welcomeLabel}>Welcome back,</Text>
                     <Text style={styles.userName}>{userInfo?.name || 'User'}</Text>
-                    <View style={styles.roleBadge}>
-                        <Text style={styles.roleText}>Student</Text>
-                    </View>
+                    {userInfo?.registerNumber ? (
+                        <Text style={styles.userRoll}>{userInfo.registerNumber}</Text>
+                    ) : null}
                 </View>
 
                 <Text style={styles.sectionTitle}>Quick Actions</Text>
@@ -39,7 +38,7 @@ const UserHomeScreen = ({ navigation }) => {
                 {/* Primary Actions Grid */}
                 <View style={styles.gridContainer}>
                     <TouchableOpacity
-                        style={[styles.actionCard, { backgroundColor: COLORS.primary }]}
+                        style={[styles.actionCard, { backgroundColor: '#FF4444' }]} // Red for Lost
                         onPress={() => navigation.navigate('ReportLost')}
                     >
                         <View style={styles.actionIconCircle}>
@@ -50,7 +49,7 @@ const UserHomeScreen = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={[styles.actionCard, { backgroundColor: COLORS.primary }]} // Updated to Primary to match login button
+                        style={[styles.actionCard, { backgroundColor: '#00C851' }]} // Green for Found
                         onPress={() => navigation.navigate('ReportFound')}
                     >
                         <View style={[styles.actionIconCircle, { backgroundColor: 'rgba(255,255,255,0.2)' }]}>
@@ -111,26 +110,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 20,
-        paddingVertical: 15,
+        paddingTop: 50, // Added extra space above
+        paddingBottom: 15,
         backgroundColor: COLORS.primary,
     },
     logoRow: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    iconCircle: {
-        width: 40,
-        height: 40,
-        backgroundColor: COLORS.accent,
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 10,
-    },
-    headerLogo: {
-        width: 24,
-        height: 24,
-        tintColor: COLORS.white,
     },
     headerTitle: {
         color: COLORS.white,
@@ -157,7 +143,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: COLORS.white,
         flexGrow: 1,
-        borderTopLeftRadius: 30,
+        borderTopLeftRadius: 30, // Restored curved edges
         borderTopRightRadius: 30,
         paddingHorizontal: 20,
         paddingTop: 30,
@@ -165,11 +151,10 @@ const styles = StyleSheet.create({
         paddingBottom: 40,
     },
     welcomeCard: {
-        backgroundColor: COLORS.primary, // Using primary color for welcome card similar to reference blue
+        backgroundColor: COLORS.primary,
         borderRadius: 20,
         padding: 20,
         marginBottom: 25,
-        // Adding a gradient-like feel or solid color
     },
     welcomeLabel: {
         color: 'rgba(255,255,255,0.8)',
@@ -180,13 +165,11 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 5,
     },
-    roleBadge: {
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        alignSelf: 'flex-start',
-        paddingHorizontal: 12,
-        paddingVertical: 5,
+    userRoll: {
+        color: 'rgba(255,255,255,0.9)',
+        fontSize: 14,
         borderRadius: 15,
     },
     roleText: {

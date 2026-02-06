@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import api from '../../services/api';
 import { COLORS } from '../../constants/theme';
 
@@ -45,6 +45,13 @@ const MyRequestsScreen = ({ navigation }) => {
 
             <Text style={styles.category}>{item.category}</Text>
             <Text style={styles.date}>{new Date(item.dateTime).toLocaleDateString()}</Text>
+            {item.imageUrl ? (
+                <Image
+                    source={{ uri: `http://10.113.185.182:8080/${item.imageUrl}` }} // imageUrl already contains 'static/images/filename'
+                    style={styles.itemImage}
+                    resizeMode="cover"
+                />
+            ) : null}
             <Text style={styles.description}>{item.description}</Text>
             {item.location ? <Text style={styles.location}>📍 {item.location}</Text> : null}
         </View>
@@ -52,6 +59,7 @@ const MyRequestsScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.header}>My Activity</Text>
             {loading ? (
                 <ActivityIndicator size="large" color={COLORS.primary} />
             ) : (
@@ -72,6 +80,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.white,
         padding: 10,
+    },
+    header: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: COLORS.primary,
+        paddingTop: 50,
+        marginBottom: 20,
+        paddingHorizontal: 10,
     },
     list: {
         paddingBottom: 20,
@@ -124,6 +140,13 @@ const styles = StyleSheet.create({
     location: {
         color: COLORS.text, // Assuming 444 is close to main text
         fontSize: 12,
+    },
+    itemImage: {
+        width: '100%',
+        height: 200,
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 10,
     },
     emptyText: {
         textAlign: 'center',

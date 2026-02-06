@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, Body
+from fastapi import APIRouter, Depends, HTTPException, Query, Body, Form, UploadFile, File
 from typing import List
 from datetime import datetime
 from bson import ObjectId
@@ -12,28 +12,45 @@ router = APIRouter()
 
 @router.post("/report", response_model=ItemResponse)
 async def report_item(
-    item_in: ItemCreate,
+    type: str = Form(...),
+    category: str = Form(...),
+    description: str = Form(...),
+    location: str = Form(...),
+    status: str = Form(...),
+    dateTime: str = Form(None), # Frontend sends ISO string
+    image: UploadFile = File(None),
     current_user: UserResponse = Depends(get_current_user),
     db = Depends(get_database)
 ):
-    item_dict = item_in.model_dump(by_alias=True)
-    item_dict["user_id"] = str(current_user.id)
-    item_dict["dateTime"] = datetime.utcnow() # Override with server time if needed, or keep user provided
-    # Java uses LocalDateTime.now(), so we should probably set it here or respect payload if valid.
-    # Java: itemRequest.setDateTime(LocalDateTime.now());
-    item_dict["dateTime"] = datetime.utcnow()
-    item_dict["status"] = ItemStatus.OPEN # Default to OPEN/PENDING. Java used PENDING which maps to OPEN in my Enum? 
-    # Wait, Java used ItemStatus.PENDING. My enum has OPEN. Let's fix enum to match Java if needed or map. 
-    # Java: PENDING, APPROVED, REJECTED, RETURNED likely?
-    # I defined OPEN, CLAIMED, RESOLVED.
-    # Let's align with Java names if possible or map.
-    # I'll stick to my Enum but comments suggest Java uses PENDING.
-    # I'll set it to ItemStatus.OPEN for now.
+    import shutil
+    import os
     
+    image_url = None
+    if image:
+        # Create static directory if it doesn't exist (safety check)
+        os.makedirs("static/images", exist_ok=True)
+        file_location = f"static/images/{image.filename}"
+        with open(file_location, "wb+") as file_object:
+             shutil.copyfileobj(image.file, file_object)
+        image_url = file_location # In prod, this would be a full URL
+
+    # Construct item dict manually since we are using Form data
+    item_dict = {
+        "type": type,
+        "category": category,
+        "description": description,
+        "location": location,
+        "status": status, # PENDING/OPEN
+        "user_id": str(current_user.id),
+        "imageUrl": image_url,
+        "dateTime": datetime.utcnow()
+    }
+
+    # Insert into DB
     result = await db["items"].insert_one(item_dict)
     created_item = await db["items"].find_one({"_id": result.inserted_id})
     
-    # Populate user (simple version, ideally aggregation)
+    # Populate user
     created_item["user"] = current_user.model_dump(by_alias=True)
     return created_item
 

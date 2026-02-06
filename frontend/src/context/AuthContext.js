@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [splashLoading, setSplashLoading] = useState(false);
     const [userToken, setUserToken] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
 
@@ -13,9 +14,9 @@ export const AuthProvider = ({ children }) => {
         setIsLoading(true);
         try {
             const response = await api.post('/auth/login', { email, password });
-            const { token, id, email: userEmail, roles } = response.data;
+            const { token, id, email: userEmail, roles, name, registerNumber } = response.data;
 
-            const userInfoData = { id, email: userEmail, roles };
+            const userInfoData = { id, email: userEmail, roles, name, registerNumber };
             setUserInfo(userInfoData);
             setUserToken(token);
 
@@ -52,19 +53,27 @@ export const AuthProvider = ({ children }) => {
 
     const isLoggedIn = async () => {
         try {
-            setIsLoading(true);
-            let userToken = await AsyncStorage.getItem('userToken');
-            let userInfo = await AsyncStorage.getItem('userInfo');
-            userInfo = JSON.parse(userInfo);
+            setSplashLoading(true);
 
-            if (userInfo) {
-                setUserToken(userToken);
-                setUserInfo(userInfo);
-            }
-            setIsLoading(false);
+            // Artificial delay for splash screen (e.g. 5 seconds as requested)
+            const minimumLoadTime = new Promise(resolve => setTimeout(resolve, 5000));
+            const authCheck = (async () => {
+                let userToken = await AsyncStorage.getItem('userToken');
+                let userInfo = await AsyncStorage.getItem('userInfo');
+                userInfo = JSON.parse(userInfo);
+
+                if (userInfo) {
+                    setUserToken(userToken);
+                    setUserInfo(userInfo);
+                }
+            })();
+
+            await Promise.all([minimumLoadTime, authCheck]);
+
+            setSplashLoading(false);
         } catch (error) {
             console.log('isLoggedIn error', error);
-            setIsLoading(false);
+            setSplashLoading(false);
         }
     };
 
@@ -73,7 +82,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ login, logout, register, isLoading, userToken, userInfo }}>
+        <AuthContext.Provider value={{ login, logout, register, isLoading, splashLoading, userToken, userInfo }}>
             {children}
         </AuthContext.Provider>
     );
