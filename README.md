@@ -35,7 +35,7 @@ Built with a focus on ease of use, security, and college branding, REC LostLink 
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>My Activity</b><br><sub>Tracking Status</sub><br>
-      <img src="docs/assets/search-white.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/search-black.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/T1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/T2.jpg" width="40%" align="middle" alt="Dark" />
     </td>
   </tr>
   <tr>
