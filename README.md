@@ -45,7 +45,7 @@ Built with a focus on ease of use, security, and college branding, REC LostLink 
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>Splash Screen</b><br><sub>Branding</sub><br>
-      <img src="docs/assets/S1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/S2.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/S1.jpg" width="40%" align="middle" alt="Light" />
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>Login</b><br><sub>Auth Screen</sub><br>
