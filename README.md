@@ -27,11 +27,11 @@ Built with a focus on ease of use, security, and college branding, REC LostLink 
   <tr>
     <td align="center" valign="top" width="33.33%">
       <b>Home</b><br><sub>App overview</sub><br>
-      <img src="docs/assets/home-white.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/home-black.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/H1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/H2.jpg" width="40%" align="middle" alt="Dark" />
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>Report Item</b><br><sub>Lost & Found Forms</sub><br>
-      <img src="docs/assets/menu-white.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/menu-black.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/R1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/R2.jpg" width="40%" align="middle" alt="Dark" />
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>My Activity</b><br><sub>Tracking Status</sub><br>
@@ -45,11 +45,11 @@ Built with a focus on ease of use, security, and college branding, REC LostLink 
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>Splash Screen</b><br><sub>Branding</sub><br>
-      <img src="docs/assets/task-manager-white.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/task-manager-black.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/S1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/S2.jpg" width="40%" align="middle" alt="Dark" />
     </td>
     <td align="center" valign="top" width="33.33%">
       <b>Login</b><br><sub>Auth Screen</sub><br>
-      <img src="docs/assets/update-white.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/update-black.jpg" width="40%" align="middle" alt="Dark" />
+      <img src="docs/assets/L1.jpg" width="40%" align="middle" alt="Light" />&nbsp;│&nbsp;<img src="docs/assets/L2.jpg" width="40%" align="middle" alt="Dark" />
     </td>
   </tr>
 </table>

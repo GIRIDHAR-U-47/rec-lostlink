@@ -13,13 +13,14 @@ const ReportLostScreen = ({ navigation }) => {
     const [loading, setLoading] = useState(false);
 
     const categories = [
-        "Electronics",
-        "ID Cards",
-        "Keys",
-        "Wallet",
-        "Clothing",
-        "Accessories",
-        "Others"
+        "DOCUMENTS",
+        "DEVICES",
+        "ACCESSORIES",
+        "PERSONAL_ITEMS",
+        "KEYS",
+        "BOOKS",
+        "JEWELLERY",
+        "OTHERS"
     ];
 
     const pickImage = async () => {
