@@ -1,6 +1,6 @@
 # REC LostLink
 
-## Description / About
+## Description / About:
 REC LostLink is a comprehensive **Lost & Found** mobile application designed specifically for **Rajalakshmi Engineering College (REC)**. It bridges the gap between students who lose their belongings and those who find them. 
 
 The application provides a seamless platform for:
